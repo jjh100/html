@@ -1,46 +1,48 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>HTML Example</title>
-  
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/about.css">
+  <title>Radio Box Email Sender</title>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <script>
+    function sendEmail() {
+      // Get the selected radio box value
+      var radioValue = document.querySelector('input[name="options"]:checked').value;
+
+      // Get the entered email
+      var email = document.getElementById("email").value;
+
+      // Configure the email parameters
+      var emailParams = {
+        to: email,
+        from: "jjh100892@naver.com",
+        subject: "Radio Box Selection",
+        body: "Selected option: " + radioValue
+      };
+
+      // Send the email using SMTP.js
+      Email.send(emailParams).then(function () {
+        alert("Email sent successfully!");
+      }).catch(function (error) {
+        console.error("Error sending email:", error);
+      });
+    }
+  </script>
 </head>
 <body>
-  <section class="center">
-    <aside class="sidebar"></aside>
-    
-    <section class="contents">
-      <!-- page will be include here -->
-      <section id="page" class="page">
-        <section id="about">
-          <section class="frame">
-            <h2><b>HELLO</b>WORLD</h2>
-            
-            <div class="cat">
-              <div class="picture">
-                <img src="images/mew.png" alt="Mew">
-              </div>
-              <small>Mew</small>
-            </div>
-            <div class="cat">
-              <div class="picture">
-                <img src="images/siesta.png" alt="Siesta">
-              </div>
-              <small>Siesta</small>
-            </div>
-            <div class="cat">
-              <div class="picture">
-                <img src="images/tiger.png" alt="Tiger">
-              </div>
-              <small>Tiger</small>
-            </div>
-          </section>
-        </section>
-      </section>
-    </section>
-  </section>
+  <h2>Radio Box Email Sender</h2>
+
+  <div>
+    <input type="radio" name="options" value="Option 1"> Option 1<br>
+    <input type="radio" name="options" value="Option 2"> Option 2<br>
+    <input type="radio" name="options" value="Option 3"> Option 3<br>
+  </div>
+
+  <div>
+    <label for="email">Enter your email:</label>
+    <input type="email" id="email">
+  </div>
+
+  <button onclick="sendEmail()">Send</button>
+
 </body>
 </html>
